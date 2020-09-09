@@ -19,6 +19,7 @@ class ColabCode:
         self.password = password
         self._mount = mount_drive
         self._install_code()
+        self._install_extensions()
         self._start_server()
         self._run_code()
 
