@@ -8,6 +8,7 @@ Quickstart:
 - run: `ColabCode(port=10000, password="abhishek")`
 - you can also run it with any password or port :)
 
+Colab starter notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/apthagowda97/colabcode/blob/colab-starter/colab_starter.ipynb)
 
 `ColabCode` has the following arguments:
 - `port`: the port you want to run code-server on, default 10000
