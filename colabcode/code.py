@@ -4,8 +4,7 @@ from pyngrok import ngrok
 try:
     from google.colab import drive
     colab_env = True
-catch ModuleNotFoundError:
-    print("Not in google colab envirement, google drive will can not be mounted")
+except ImportError:
     colab_env = False
 
 
