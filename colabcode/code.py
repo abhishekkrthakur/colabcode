@@ -4,11 +4,17 @@ from pyngrok import ngrok
 import sys
 import logging
 logging.basicConfig(filename='colabcode.log',level=logging.INFO)
+try:
+    from google.colab import drive
+    colab_env = True
+except ImportError:
+    colab_env = False
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, packages=None):
+    def __init__(self, port=10000, password=None, gcloud=False, packages=None):
         self.port = port
         self.password = password
+        self._mount = gcloud
         self._install_code()
         self._start_server()
         self.packages = packages
@@ -33,6 +39,8 @@ class ColabCode:
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
+        if self._mount and colab_env:
+            drive.mount("/content/drive")
         if self.password:
             code_cmd = f"PASSWORD={self.password} code-server --port {self.port} --disable-telemetry"
         else:
