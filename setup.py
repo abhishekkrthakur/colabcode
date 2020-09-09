@@ -9,8 +9,8 @@ with open("README.md", encoding="utf-8") as f:
 
 if __name__ == "__main__":
     setup(
-        name="ColabCode",
-        version=0.0.1,
+        name="colabcode",
+        version="0.0.2",
         description="ColabCode - Run codeserver on Colab!",
         long_description=long_description,
         long_description_content_type="text/markdown",

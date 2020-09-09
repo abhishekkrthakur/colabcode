@@ -4,10 +4,9 @@ from pyngrok import ngrok
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, close_old_connections=True):
+    def __init__(self, port=10000, password=None):
         self.port = port
         self.password = password
-        self.close_old_connections = close_old_connections
         self._install_code()
         self._start_server()
         self._run_code()
