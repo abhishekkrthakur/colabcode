@@ -10,11 +10,11 @@ class ColabCode:
         self.password = password
         self._install_code()
         self._start_server()
-        self._run_code()
+        self.packages = packages
         if self.packages:
-            self._install_libraries()
-            
-
+            self._install_packages()
+        self._run_code()
+        
     def _install_code(self):
         subprocess.run(
             ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
@@ -45,7 +45,8 @@ class ColabCode:
             for line in proc.stdout:
                 print(line, end="")
                 
-    def _install_libraries(self):
+    def _install_packages(self):
         for package in self.packages:
+            print(f'Installing {package}...')
             subprocess.check_call([sys.executable, "-m", "pip", "install", package]) 
         
