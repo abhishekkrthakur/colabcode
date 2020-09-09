@@ -1,0 +1,80 @@
+default_language_version:
+    python: python3
+
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: master
+    hooks:
+        -   id: check-merge-conflict
+        -   id: check-added-large-files
+            args: ['--maxkb=30000']
+        -   id: check-executables-have-shebangs
+        -   id: trailing-whitespace
+-   repo: https://github.com/psf/black
+    rev: stable
+    hooks:
+    - id: black
+      language_version: python3.6
+-   repo: local
+    hooks:
+    -   id: flake8
+        name: flake8
+        description: Python style guide enforcement.
+        entry: flake8
+        args: [
+            "--config=setup.cfg",
+            "--ignore=E501,PD011,F403,F405,W503,E231,VNE001"
+        ]
+        additional_dependencies: [
+            flake8,
+            flake8-2020, # flake8 plugin which checks for misuse of `sys.version` or `sys.version_info`
+            flake8-blind-except, # A flake8 extension that checks for blind except: statements
+            flake8-builtins, # Check for python builtins being used as variables or parameters.
+            flake8-comprehensions, # It helps you write better list/set/dict comprehensions.
+            dlint, # Dlint is a tool for encouraging best coding practices and helping ensure we're writing secure Python code.
+            flake8-pytest, # pytest assert checker plugin for flake8
+            flake8-tabs, # Tab (or Spaces) indentation style checker for flake8
+        ]
+        language: python
+        language_version: python3.6
+        types: [python]
+        require_serial: true
+    -   id: autoflake
+        name: autoflake
+        description: remove unused imports
+        entry: autoflake
+        args: [
+            "--in-place",
+            "--remove-unused-variables"
+        ]
+        language: python
+        language_version: python3.6
+        types: [python]
+        require_serial: true
+        additional_dependencies: [autoflake]
+    -   id: isort
+        name: isort
+        description: Automatically sort imports.
+        entry: isort
+        args: [
+            "--recursive",
+        ]
+        language: python
+        language_version: python3.6
+        types: [python]
+        require_serial: true
+        additional_dependencies: [isort]
+    -   id: pytest
+        name: Run Pytest
+        description: Run Python unit-tests
+        entry: pytest
+        language: python
+        types: [python]
+        language_version: python3.6
+        require_serial: true
+        stages: [push]
+        additional_dependencies: [
+            pytest,
+            pytest-cov,
+            pytest-mock
+        ]

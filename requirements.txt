@@ -1,1 +1,4 @@
-pyngrok=4.1.11
+pyngrok==4.1.11
+pre-commit
+flake8
+black
