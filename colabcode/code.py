@@ -1,8 +1,9 @@
 import os
 import subprocess
 from pyngrok import ngrok
-import subprocess
 import sys
+import logging
+logging.basicConfig(filename='colabcode.log',level=logging.INFO)
 
 class ColabCode:
     def __init__(self, port=10000, password=None, packages=None):
@@ -14,6 +15,7 @@ class ColabCode:
         if self.packages:
             self._install_packages()
         self._run_code()
+        
         
     def _install_code(self):
         subprocess.run(
@@ -47,6 +49,5 @@ class ColabCode:
                 
     def _install_packages(self):
         for package in self.packages:
-            print(f'Installing {package}...')
+            logging.info(f'Installing {package}...')
             subprocess.check_call([sys.executable, "-m", "pip", "install", package]) 
-        
