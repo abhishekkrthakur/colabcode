@@ -12,11 +12,13 @@ class ColabCode:
         self._install_code()
         self._start_server()
         self._run_code()
+        
     def _install_code(self):
         subprocess.run(
             ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
         )
         subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
+        
     def _start_server(self):
         active_tunnels = ngrok.get_tunnels()
         for tunnel in active_tunnels:
@@ -24,6 +26,7 @@ class ColabCode:
             ngrok.disconnect(public_url)
         url = ngrok.connect(port=self.port)
         print(f"Code Server can be accessed on: {url}")
+        
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
         if self.gcloud:
