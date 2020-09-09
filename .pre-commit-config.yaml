@@ -14,7 +14,7 @@ repos:
     rev: stable
     hooks:
     - id: black
-      language_version: python3.6
+      language_version: python3.7
 -   repo: local
     hooks:
     -   id: flake8
@@ -36,7 +36,7 @@ repos:
             flake8-tabs, # Tab (or Spaces) indentation style checker for flake8
         ]
         language: python
-        language_version: python3.6
+        language_version: python3.7
         types: [python]
         require_serial: true
     -   id: autoflake
@@ -48,7 +48,7 @@ repos:
             "--remove-unused-variables"
         ]
         language: python
-        language_version: python3.6
+        language_version: python3.7
         types: [python]
         require_serial: true
         additional_dependencies: [autoflake]
@@ -60,7 +60,7 @@ repos:
             "--recursive",
         ]
         language: python
-        language_version: python3.6
+        language_version: python3.7
         types: [python]
         require_serial: true
         additional_dependencies: [isort]
@@ -70,7 +70,7 @@ repos:
         entry: pytest
         language: python
         types: [python]
-        language_version: python3.6
+        language_version: python3.7
         require_serial: true
         stages: [push]
         additional_dependencies: [
