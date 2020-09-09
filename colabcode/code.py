@@ -1,15 +1,19 @@
 import os
 import subprocess
 from pyngrok import ngrok
-
+import subprocess
+import sys
 
 class ColabCode:
-    def __init__(self, port=10000, password=None):
+    def __init__(self, port=10000, password=None, packages=None):
         self.port = port
         self.password = password
         self._install_code()
         self._start_server()
         self._run_code()
+        if self.packages:
+            self._install_libraries()
+            
 
     def _install_code(self):
         subprocess.run(
@@ -40,3 +44,8 @@ class ColabCode:
         ) as proc:
             for line in proc.stdout:
                 print(line, end="")
+                
+    def _install_libraries(self):
+        for package in self.packages:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", package]) 
+        
