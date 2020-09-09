@@ -31,7 +31,7 @@ class ColabCode:
 
     def _install_extensions(self):
         for ext in EXTENSIONS:
-            subprocess.run([f"code-server --install-extension {ext}"])
+            subprocess.run([f"code-server", "--install-extension", "{ext}"])
 
     def _start_server(self):
         active_tunnels = ngrok.get_tunnels()
