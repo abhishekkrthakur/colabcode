@@ -6,16 +6,23 @@ import logging
 logging.basicConfig(filename='colabcode.log',level=logging.INFO)
 try:
     from google.colab import drive
+
     colab_env = True
 except ImportError:
     colab_env = False
 
+
+EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
+
+
 class ColabCode:
-    def __init__(self, port=10000, password=None, gcloud=False, packages=None):
+    def __init__(self, port=10000, password=None, mount_drive=False, packages=None):
+
         self.port = port
         self.password = password
-        self._mount = gcloud
+        self._mount = mount_drive
         self._install_code()
+        self._install_extensions()
         self._start_server()
         self.packages = packages
         if self.packages:
@@ -28,6 +35,10 @@ class ColabCode:
             ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
         )
         subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
+
+    def _install_extensions(self):
+        for ext in EXTENSIONS:
+            subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
         active_tunnels = ngrok.get_tunnels()
