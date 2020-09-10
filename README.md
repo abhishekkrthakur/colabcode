@@ -18,3 +18,5 @@ Colab starter notebook: [![Open In Colab](https://colab.research.google.com/asse
 `ColabCode` comes pre-installed with some VS Code extensions.
 
 See an example in [this video tutorial](https://www.youtube.com/watch?v=7kTbM3D02jU).
+
+Also an article [here](https://ernestowojori.hashnode.dev/vscode-code-server-in-the-cloud-a-simple-classification-example-on-kaggle) by [Ernest Owojori](https://github.com/E-STAT).
