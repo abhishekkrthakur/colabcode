@@ -1,5 +1,10 @@
 # ColabCode
 
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![pypi version](https://badge.fury.io/py/diagrams.svg)](https://pypi.org/project/colabcode)
+![python version](https://img.shields.io/badge/python-3.6%2C3.7%2C3.8-blue?logo=python)
+
+
 Run code server on Google Colab or Kaggle Notebooks
 
 Quickstart:
