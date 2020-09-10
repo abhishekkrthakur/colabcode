@@ -1,7 +1,7 @@
 # ColabCode
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-[![pypi version](https://badge.fury.io/py/diagrams.svg)](https://pypi.org/project/colabcode)
+[![PyPI version](https://badge.fury.io/py/colabcode.svg)](https://badge.fury.io/py/colabcode)
 ![python version](https://img.shields.io/badge/python-3.6%2C3.7%2C3.8-blue?logo=python)
 
 
@@ -34,7 +34,7 @@ Colab starter notebook: [![Open In Colab](https://colab.research.google.com/asse
 
 `ColabCode` comes pre-installed with some VS Code extensions.
 
-See an example in [this video tutorial](https://www.youtube.com/watch?v=7kTbM3D02jU).
+##### See an example in youtube video     [![YouTube Video](https://img.shields.io/youtube/views/7kTbM3D02jU?style=social)](https://youtu.be/7kTbM3D02jU)
 
 ## License
 
