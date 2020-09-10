@@ -14,11 +14,17 @@ EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, mount_drive=False):
+    def __init__(self, port=10000, password=None, mount_drive=False, add_extensions=None):
         self.port = port
         self.password = password
         self._mount = mount_drive
         self._install_code()
+        if add_extensions is not None:
+            global EXTENSIONS
+            if type(add_extensions) == list and type(add_extensions[0]) == str:
+                EXTENSIONS += add_extensions
+            else: 
+                raise TypeError("You need to pass a list of string(s) e.g. ['ms-python.python']")
         self._install_extensions()
         self._start_server()
         self._run_code()
