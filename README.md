@@ -3,6 +3,9 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 [![PyPI version](https://badge.fury.io/py/colabcode.svg)](https://badge.fury.io/py/colabcode)
 ![python version](https://img.shields.io/badge/python-3.6%2C3.7%2C3.8-blue?logo=python)
+![PyPI Downloads](https://img.shields.io/pypi/dd/ColabCode?color=important)
+![No of Contributors](https://img.shields.io/github/contributors/abhishekkrthakur/colabcode?color=9cf)
+![No of Stars](https://img.shields.io/github/stars/abhishekkrthakur/colabcode?style=plastic)
 
 
 
