@@ -11,6 +11,25 @@ Run code server on Google Colab or Kaggle Notebooks
 
 ## Getting Started
 
+ColabCode also has a command-line script. So you can just run `colabcode` from command line.
+
+`colabcode -h` will give the following:
+
+```
+usage: colabcode [-h] --port PORT [--password PASSWORD] [--mount_drive]
+
+ColabCode: Run VS Code On Colab / Kaggle Notebooks
+
+required arguments:
+  --port PORT          the port you want to run code-server on
+
+optional arguments:
+  --password PASSWORD  password to protect your code-server from unauthorized access
+  --mount_drive        if you use --mount_drive, your google drive will be mounted
+```
+
+Else, you can do the following:
+
 
 ```shell
 # install colabcode
