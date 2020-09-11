@@ -5,7 +5,13 @@
 ![python version](https://img.shields.io/badge/python-3.6%2C3.7%2C3.8-blue?logo=python)
 
 
+## Installation
 
+Installation is easy!
+
+```
+$ pip install colabcode
+```
 
 Run code server on Google Colab or Kaggle Notebooks
 
@@ -32,8 +38,6 @@ Else, you can do the following:
 
 
 ```shell
-# install colabcode
-$ pip install colabcode
 
 # import colabcode
 $ from colabcode import ColabCode
