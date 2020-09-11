@@ -1,0 +1,34 @@
+#! /usr/bin/env python
+
+import argparse
+from colabcode import ColabCode
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="ColabCode: Run VS Code On Colab / Kaggle Notebooks"
+    )
+    parser._action_groups.pop()
+    required = parser.add_argument_group("required arguments")
+    optional = parser.add_argument_group("optional arguments")
+
+    required.add_argument(
+        "--port",
+        type=int,
+        help="the port you want to run code-server on",
+        required=True,
+    )
+    optional.add_argument(
+        "--password",
+        type=str,
+        help="password to protect your code-server from unauthorized access",
+        default=None,
+    )
+    optional.add_argument(
+        "--mount_drive",
+        action="store_true",
+        help="if you use --mount_drive, your google drive will be mounted",
+    )
+
+    args = parser.parse_args()
+
+    ColabCode(port=args.port, password=args.password, mount_drive=args.mount_drive)
