@@ -10,7 +10,7 @@ except ImportError:
     colab_env = False
 
 
-EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer", "Pylance"]
+EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
 
 
 class ColabCode:
