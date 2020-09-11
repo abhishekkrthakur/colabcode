@@ -1,7 +1,9 @@
 import os
 import subprocess
 from pyngrok import ngrok
-
+import sys
+import logging
+logging.basicConfig(filename='colabcode.log',level=logging.INFO)
 try:
     from google.colab import drive
 
@@ -14,15 +16,20 @@ EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, mount_drive=False):
+    def __init__(self, port=10000, password=None, mount_drive=False, packages=None):
+
         self.port = port
         self.password = password
         self._mount = mount_drive
         self._install_code()
         self._install_extensions()
         self._start_server()
+        self.packages = packages
+        if self.packages:
+            self._install_packages()
         self._run_code()
-
+        
+        
     def _install_code(self):
         subprocess.run(
             ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
@@ -58,3 +65,8 @@ class ColabCode:
         ) as proc:
             for line in proc.stdout:
                 print(line, end="")
+                
+    def _install_packages(self):
+        for package in self.packages:
+            logging.info(f'Installing {package}...')
+            subprocess.check_call([sys.executable, "-m", "pip", "install", package]) 

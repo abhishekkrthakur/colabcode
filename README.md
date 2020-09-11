@@ -9,9 +9,6 @@
 
 Run code server on Google Colab or Kaggle Notebooks
 
-## Getting Started
-
-
 ```shell
 # install colabcode
 $ pip install colabcode
@@ -26,16 +23,19 @@ $ ColabCode()
 # - port: the port you want to run code-server on, default 10000
 # - password: password to protect your code server from being accessed by someone else. Note that there is no password by default!
 # - mount_drive: True or False to mount your Google Drive
+# - packages: list of packages to be installed
 
-$ ColabCode(port=10000, password="abhishek", mount_drive=True)
+$ ColabCode(port=10000, password="abhishek", mount_drive=True, packages=['torchaudio', 'pytorch_lightning'])
 ```
 ## How to use it?
 Colab starter notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhishekkrthakur/colabcode/blob/master/colab_starter.ipynb)
 
 `ColabCode` comes pre-installed with some VS Code extensions.
 
+
 ##### See an example in youtube video     [![YouTube Video](https://img.shields.io/youtube/views/7kTbM3D02jU?style=social)](https://youtu.be/7kTbM3D02jU)
 
 ## License
 
 [MIT](LICENSE)
+
