@@ -14,9 +14,10 @@ EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, mount_drive=False):
+    def __init__(self, port=10000, password=None, user_data_dir=None, mount_drive=False):
         self.port = port
         self.password = password
+        self.user_data_dir = user_data_dir
         self._mount = mount_drive
         self._install_code()
         self._install_extensions()
@@ -45,8 +46,12 @@ class ColabCode:
         os.system(f"fuser -n tcp -k {self.port}")
         if self._mount and colab_env:
             drive.mount("/content/drive")
-        if self.password:
+        if self.password and self.user_data_dir:
+            code_cmd = f"PASSWORD={self.password} code-server --port {self.port} --user-data-dir {self.user_data_dir} --disable-telemetry"
+        elif self.password:
             code_cmd = f"PASSWORD={self.password} code-server --port {self.port} --disable-telemetry"
+        elif self.user_data_dir:
+            code_cmd = f"code-server --port {self.port} --auth none --user-data-dir {self.user_data_dir} --disable-telemetry"
         else:
             code_cmd = f"code-server --port {self.port} --auth none --disable-telemetry"
         with subprocess.Popen(
