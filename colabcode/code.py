@@ -10,7 +10,10 @@ except ImportError:
     colab_env = False
 
 
-EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
+EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer", 
+              "njpwerner.autodocstring", "ms-python.vscode-pylance", "ms-vscode-remote.remote-wsl", "ms-python.anaconda-extension-pack",
+              "donjayamanne.githistory", "bee.git-temporal-vscode", "kiteco.kite", "vscode-icons-team.vscode-icons"] 
+              ## "julialang.language-julia"
 
 
 class ColabCode:
