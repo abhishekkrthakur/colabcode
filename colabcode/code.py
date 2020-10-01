@@ -43,8 +43,11 @@ class ColabCode:
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
-        if self._mount and colab_env:
-            drive.mount("/content/drive")
+        if self._mount:
+            if colab_env:
+                drive.mount("/content/drive")
+            else:
+                print("Mounting drive is supported only in colab")
         if self.password:
             code_cmd = f"PASSWORD={self.password} code-server --port {self.port} --disable-telemetry"
         else:
