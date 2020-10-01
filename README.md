@@ -56,6 +56,8 @@ $ ColabCode(port=10000, password="abhishek", mount_drive=True)
 ## How to use it?
 Colab starter notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhishekkrthakur/colabcode/blob/master/colab_starter.ipynb)
 
+Kaggle starter notebook: [![Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/kernels/fork-version/43820352)
+
 `ColabCode` comes pre-installed with some VS Code extensions.
 
 ##### See an example in youtube video     [![YouTube Video](https://img.shields.io/youtube/views/7kTbM3D02jU?style=social)](https://youtu.be/7kTbM3D02jU)
