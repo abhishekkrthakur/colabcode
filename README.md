@@ -23,7 +23,7 @@ ColabCode also has a command-line script. So you can just run `colabcode` from c
 `colabcode -h` will give the following:
 
 ```
-usage: colabcode [-h] --port PORT [--password PASSWORD] [--mount_drive]
+usage: colabcode [-h] --port PORT [--password PASSWORD] [--mount_drive] [--option OPTION]
 
 ColabCode: Run VS Code On Colab / Kaggle Notebooks
 
@@ -33,6 +33,7 @@ required arguments:
 optional arguments:
   --password PASSWORD  password to protect your code-server from unauthorized access
   --mount_drive        if you use --mount_drive, your google drive will be mounted
+  --option             choose between "localtunnel" and "ngrok" for tunneling services
 ```
 
 Else, you can do the following:
