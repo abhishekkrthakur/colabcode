@@ -39,7 +39,7 @@ class ColabCode:
             public_url = tunnel.public_url
             ngrok.disconnect(public_url)
         url = ngrok.connect(port=self.port, options={"bind_tls": True})
-        print(f"Code Server can be accessed on: {url}")
+        print(f"Code Server can be accessed on: {url}/?folder=/content/drive")
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
