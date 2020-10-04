@@ -42,7 +42,7 @@ class ColabCode:
         if self._mount:
             print(f"Code Server can be accessed on: {url}/?folder=/content/drive/My%20Drive")
         else:
-            print(f"Code Server can be accessed on: {url}")
+            print(f"Code Server can be accessed on: {url}/?folder=/content")
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
