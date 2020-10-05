@@ -1,14 +1,15 @@
 from setuptools import setup, Extension
 from setuptools import find_packages
 
-with open("README.md", encoding="utf-8") as f:
+with open("README.md") as f:
     long_description = f.read()
 
 
 if __name__ == "__main__":
     setup(
         name="colabcode",
-        version="0.0.6",
+        scripts=["scripts/colabcode"],
+        version="0.0.8",
         description="ColabCode - Run codeserver on Colab!",
         long_description=long_description,
         long_description_content_type="text/markdown",
@@ -18,7 +19,7 @@ if __name__ == "__main__":
         license="MIT License",
         packages=find_packages(),
         include_package_data=True,
-        install_requires=["pyngrok>=4.1.11"],
+        install_requires=["pyngrok>=4.1.12"],
         platforms=["linux", "unix"],
         python_requires=">3.5.2",
     )
