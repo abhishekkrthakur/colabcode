@@ -35,7 +35,8 @@ class ColabCode:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
-        ngrok.set_auth_token(self.authtoken)
+        if self.authtoken:
+            ngrok.set_auth_token(self.authtoken)
         active_tunnels = ngrok.get_tunnels()
         for tunnel in active_tunnels:
             public_url = tunnel.public_url
