@@ -14,9 +14,10 @@ EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, mount_drive=False):
+    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False):
         self.port = port
         self.password = password
+        self.authtoken = authtoken
         self._mount = mount_drive
         self._install_code()
         self._install_extensions()
@@ -34,6 +35,8 @@ class ColabCode:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
+        if self.authtoken:
+            ngrok.set_auth_token(self.authtoken)
         active_tunnels = ngrok.get_tunnels()
         for tunnel in active_tunnels:
             public_url = tunnel.public_url
@@ -58,3 +61,4 @@ class ColabCode:
         ) as proc:
             for line in proc.stdout:
                 print(line, end="")
+
