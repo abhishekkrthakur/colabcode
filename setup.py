@@ -19,7 +19,7 @@ if __name__ == "__main__":
         license="MIT License",
         packages=find_packages(),
         include_package_data=True,
-        install_requires=["pyngrok>=4.1.12"],
+        install_requires=["pyngrok>=5.0.0"],
         platforms=["linux", "unix"],
         python_requires=">3.5.2",
     )
