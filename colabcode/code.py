@@ -51,9 +51,9 @@ class ColabCode:
         if self._mount and colab_env:
             drive.mount("/content/drive")
         if self.password:
-            code_cmd = f"PASSWORD={self.password} code-server --port {self.port} --disable-telemetry"
+            code_cmd = f"PASSWORD={self.password} code-server /content/drive/'My Drive' --port {self.port} --disable-telemetry"
         else:
-            code_cmd = f"code-server --port {self.port} --auth none --disable-telemetry"
+            code_cmd = f"code-server /content/drive/'My Drive' --port {self.port} --auth none --disable-telemetry"
         with subprocess.Popen(
             [code_cmd],
             shell=True,
