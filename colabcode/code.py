@@ -20,7 +20,7 @@ class ColabCode:
         self.authtoken = authtoken
         self._mount = mount_drive
         self._install_code()
-        self._install_extensions(extentions)
+        self._install_extensions(extensions)
         self._start_server()
         self._run_code()
 
@@ -30,7 +30,7 @@ class ColabCode:
         )
         subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
 
-    def _install_extensions(self,extentions):
+    def _install_extensions(self,extensions):
         for ext in EXTENSIONS:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
         for ext in extensions:
