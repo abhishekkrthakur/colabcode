@@ -14,13 +14,13 @@ EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False):
+    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False,extentions=None):
         self.port = port
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
         self._install_code()
-        self._install_extensions()
+        self._install_extensions(extentions)
         self._start_server()
         self._run_code()
 
@@ -30,8 +30,10 @@ class ColabCode:
         )
         subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
 
-    def _install_extensions(self):
+    def _install_extensions(self,extentions):
         for ext in EXTENSIONS:
+            subprocess.run(["code-server", "--install-extension", f"{ext}"])
+        for ext in extentions:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
