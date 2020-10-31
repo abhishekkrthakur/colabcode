@@ -14,7 +14,7 @@ EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False,extentions=None):
+    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False,extentions=[]):
         self.port = port
         self.password = password
         self.authtoken = authtoken
