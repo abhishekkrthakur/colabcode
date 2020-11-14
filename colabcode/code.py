@@ -10,7 +10,7 @@ except ImportError:
     colab_env = False
 
 
-EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
+EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter"]
 
 
 class ColabCode:
