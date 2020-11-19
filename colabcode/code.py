@@ -14,21 +14,26 @@ EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter"]
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False):
+    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False, code_server='latest'):
         self.port = port
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
+        self._code_server = code_server
         self._install_code()
         self._install_extensions()
         self._start_server()
         self._run_code()
 
-    def _install_code(self):
+    def _install_code(self):        
         subprocess.run(
             ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
         )
-        subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
+        if self._code_server == 'latest':
+            subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
+        else:
+            subprocess.run(["sh", "install.sh", "--version", f"{self._code_server}"], stdout=subprocess.PIPE)
+            
 
     def _install_extensions(self):
         for ext in EXTENSIONS:
@@ -61,4 +66,3 @@ class ColabCode:
         ) as proc:
             for line in proc.stdout:
                 print(line, end="")
-

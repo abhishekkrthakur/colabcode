@@ -28,7 +28,14 @@ if __name__ == "__main__":
         action="store_true",
         help="if you use --mount_drive, your google drive will be mounted",
     )
+    optional.add_argument(
+        "--code_server",
+        action="store_true",
+        default="latest",
+        type=str
+        help="if you use --code_server, specify code server version in the format X.X.X",
+    )
 
     args = parser.parse_args()
 
-    ColabCode(port=args.port, password=args.password, mount_drive=args.mount_drive)
+    ColabCode(port=args.port, password=args.password, mount_drive=args.mount_drive, code_server=args.code_server)
