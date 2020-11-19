@@ -33,6 +33,7 @@ required arguments:
 optional arguments:
   --password PASSWORD  password to protect your code-server from unauthorized access
   --mount_drive        if you use --mount_drive, your google drive will be mounted
+  --code_server   code server version you want to use default is the latest
 ```
 
 Else, you can do the following:
@@ -50,13 +51,16 @@ $ ColabCode()
 # - port: the port you want to run code-server on, default 10000
 # - password: password to protect your code server from being accessed by someone else. Note that there is no password by default!
 # - mount_drive: True or False to mount your Google Drive
-
-$ ColabCode(port=10000, password="abhishek", mount_drive=True)
+# - code_server: code server version in the form X.X.X , default latest
+$ ColabCode(port=10000, password="abhishek", mount_drive=True, code_server=3.6.0)
 ```
 ## How to use it?
 Colab starter notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhishekkrthakur/colabcode/blob/master/colab_starter.ipynb)
 
 `ColabCode` comes pre-installed with some VS Code extensions.
+
+You can find code server release versions [here](https://github.com/cdr/code-server/releases).
+>Do note you may find some versions not working, so skip them.
 
 ##### See an example in youtube video     [![YouTube Video](https://img.shields.io/youtube/views/7kTbM3D02jU?style=social)](https://youtu.be/7kTbM3D02jU)
 
