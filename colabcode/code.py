@@ -29,10 +29,10 @@ class ColabCode:
         subprocess.run(
             ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
         )
-        if self._code_server = 'latest':
+        if self._code_server == 'latest':
             subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
         else:
-            subprocess.run(["sh", "install.sh", "--version", str(self._code_server)], stdout=subprocess.PIPE)
+            subprocess.run(["sh", "install.sh", "--version", f"{self._code_server}"], stdout=subprocess.PIPE)
             
 
     def _install_extensions(self):
