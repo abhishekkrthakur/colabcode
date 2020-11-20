@@ -53,7 +53,7 @@ $ ColabCode()
 # - mount_drive: True or False to mount your Google Drive
 # - option: "localtunnel" or "ngrok" to use respective tunneling services
 
-$ ColabCode(port=10000, password="abhishek", mount_drive=True,option="localtunnel")
+$ ColabCode(port=10000, password="abhishek", mount_drive=True, option="localtunnel")
 ```
 ## How to use it?
 Colab starter notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhishekkrthakur/colabcode/blob/master/colab_starter.ipynb)
