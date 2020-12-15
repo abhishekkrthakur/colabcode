@@ -15,13 +15,13 @@ CODESERVER_VERSION = "3.7.4"
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False):
+    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False,extensions=[]):
         self.port = port
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
         self._install_code()
-        self._install_extensions()
+        self._install_extensions(extensions)
         self._start_server()
         self._run_code()
 
@@ -34,8 +34,10 @@ class ColabCode:
             stdout=subprocess.PIPE,
         )
 
-    def _install_extensions(self):
+    def _install_extensions(self,extensions):
         for ext in EXTENSIONS:
+            subprocess.run(["code-server", "--install-extension", f"{ext}"])
+        for ext in extensions:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
@@ -53,9 +55,9 @@ class ColabCode:
         if self._mount and colab_env:
             drive.mount("/content/drive")
         if self.password:
-            code_cmd = f"PASSWORD={self.password} code-server --port {self.port} --disable-telemetry"
+            code_cmd = f"PASSWORD={self.password} code-server /content/drive/'My Drive' --port {self.port} --disable-telemetry"
         else:
-            code_cmd = f"code-server --port {self.port} --auth none --disable-telemetry"
+            code_cmd = f"code-server /content/drive/'My Drive' --port {self.port} --auth none --disable-telemetry"
         with subprocess.Popen(
             [code_cmd],
             shell=True,
