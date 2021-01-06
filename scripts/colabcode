@@ -28,6 +28,12 @@ if __name__ == "__main__":
         action="store_true",
         help="if you use --mount_drive, your google drive will be mounted",
     )
+    optional.add_argument(
+        "--drive_absolute_path",
+        type=str,
+        help="open your code-server directly from the folder you want. Accepts absolute path.",
+        default=None
+    )
 
     args = parser.parse_args()
 
