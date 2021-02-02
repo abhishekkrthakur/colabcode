@@ -1,9 +1,9 @@
 import os
 import subprocess
 
-from pyngrok import ngrok
 import nest_asyncio
 import uvicorn
+from pyngrok import ngrok
 
 
 try:
@@ -19,7 +19,9 @@ CODESERVER_VERSION = "3.7.4"
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False, code=True):
+    def __init__(
+        self, port=10000, password=None, authtoken=None, mount_drive=False, code=True
+    ):
         self.port = port
         self.password = password
         self.authtoken = authtoken
@@ -33,7 +35,9 @@ class ColabCode:
 
     @staticmethod
     def _install_code():
-        subprocess.run(["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE)
+        subprocess.run(
+            ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
+        )
         subprocess.run(
             ["sh", "install.sh", "--version", f"{CODESERVER_VERSION}"],
             stdout=subprocess.PIPE,
