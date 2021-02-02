@@ -1,5 +1,5 @@
-from setuptools import setup, Extension
-from setuptools import find_packages
+from setuptools import Extension, find_packages, setup
+
 
 with open("README.md") as f:
     long_description = f.read()
@@ -9,7 +9,7 @@ if __name__ == "__main__":
     setup(
         name="colabcode",
         scripts=["scripts/colabcode"],
-        version="0.0.9",
+        version="0.1.2",
         description="ColabCode - Run codeserver on Colab!",
         long_description=long_description,
         long_description_content_type="text/markdown",

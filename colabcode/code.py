@@ -1,6 +1,8 @@
 import os
 import subprocess
+
 from pyngrok import ngrok
+
 
 try:
     from google.colab import drive
@@ -10,31 +12,39 @@ except ImportError:
     colab_env = False
 
 
-EXTENSIONS = ["ms-python.python", "jithurjacob.nbpreviewer"]
+EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter"]
+CODESERVER_VERSION = "3.7.4"
 
 
 class ColabCode:
-    def __init__(self, port=10000, password=None, authtoken=None, mount_drive=False,extensions=[]):
+    def __init__(
+        self, port=10000, password=None, authtoken=None, mount_drive=False, code=True
+    ):
         self.port = port
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
+        self._code = code
         self._install_code()
-        self._install_extensions(extensions)
         self._start_server()
-        self._run_code()
+        if self._code:
+            self._run_code()
 
-    def _install_code(self):
+    @staticmethod
+    def _install_code():
         subprocess.run(
             ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
         )
-        subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
+        subprocess.run(
+            ["sh", "install.sh", "--version", f"{CODESERVER_VERSION}"],
+            stdout=subprocess.PIPE,
+        )
 
-    def _install_extensions(self,extensions):
+    @staticmethod
+    def _install_extensions():
         for ext in EXTENSIONS:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
-        for ext in extensions:
-            subprocess.run(["code-server", "--install-extension", f"{ext}"])
+
 
     def _start_server(self):
         if self.authtoken:
@@ -44,7 +54,10 @@ class ColabCode:
             public_url = tunnel.public_url
             ngrok.disconnect(public_url)
         url = ngrok.connect(addr=self.port, options={"bind_tls": True})
-        print(f"Code Server can be accessed on: {url}")
+        if self._code:
+            print(f"Code Server can be accessed on: {url}")
+        else:
+            print(f"Public URL: {url}")
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
@@ -63,4 +76,3 @@ class ColabCode:
         ) as proc:
             for line in proc.stdout:
                 print(line, end="")
-
