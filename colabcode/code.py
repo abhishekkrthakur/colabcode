@@ -1,5 +1,6 @@
 import os
 import subprocess
+import uuid
 
 import nest_asyncio
 import uvicorn
@@ -36,7 +37,7 @@ class ColabCode:
         self._lab = lab
         if self._lab:
             self._start_server()
-            # self._run_lab()
+            self._run_lab()
         if self._code:
             self._install_code()
             self._install_extensions()
@@ -45,7 +46,9 @@ class ColabCode:
 
     @staticmethod
     def _install_code():
-        subprocess.run(["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE)
+        subprocess.run(
+            ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
+        )
         subprocess.run(
             ["sh", "install.sh", "--version", f"{CODESERVER_VERSION}"],
             stdout=subprocess.PIPE,
@@ -70,14 +73,17 @@ class ColabCode:
             print(f"Public URL: {url}")
 
     def _run_lab(self):
-        base_cmd = f"jupyter-lab --ip='localhost' --port {self.port} --no-browser --NotebookApp.token='' --NotebookApp.allow_origin='*'"
+        token = str(uuid.uuid1())
+        print(f"Jupyter lab token: {token}")
+        base_cmd = "jupyter-lab --ip='localhost' --allow-root --ServerApp.allow_remote_access=True --no-browser"
         os.system(f"fuser -n tcp -k {self.port}")
         if self._mount and colab_env:
             drive.mount("/content/drive")
         if self.password:
-            lab_cmd = base_cmd + f" --NotebookApp.password='{self.password}' --allow-root"
+            lab_cmd = f" --ServerApp.token='{token}' --ServerApp.password='{self.password}' --port {self.port}"
         else:
-            lab_cmd = base_cmd + " --NotebookApp.password='' --allow-root"
+            lab_cmd = f" --ServerApp.token='{token}' --ServerApp.password='' --port {self.port}"
+        lab_cmd = base_cmd + lab_cmd
         with subprocess.Popen(
             [lab_cmd],
             shell=True,
