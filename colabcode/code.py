@@ -3,7 +3,7 @@ import subprocess
 
 import nest_asyncio
 import uvicorn
-from pyngrok import ngrok
+from pyngrok import ngrok, conf
 
 
 try:
@@ -20,12 +20,13 @@ CODESERVER_VERSION = "3.7.4"
 
 class ColabCode:
     def __init__(
-        self, port=10000, password=None, authtoken=None, mount_drive=False, code=True
+        self, port=10000, password=None, authtoken=None, mount_drive=False, region="us", code=True
     ):
         self.port = port
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
+        self.region = region
         self._code = code
         if self._code:
             self._install_code()
@@ -49,6 +50,7 @@ class ColabCode:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
+        conf.get_default().region = self.region
         if self.authtoken:
             ngrok.set_auth_token(self.authtoken)
         active_tunnels = ngrok.get_tunnels()
