@@ -20,13 +20,22 @@ CODESERVER_VERSION = "3.7.4"
 
 class ColabCode:
     def __init__(
-        self, port=10000, password=None, authtoken=None, mount_drive=False, code=True
+        self,
+        port=10000,
+        password=None,
+        authtoken=None,
+        mount_drive=False,
+        code=True,
+        lab=False,
     ):
         self.port = port
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
         self._code = code
+        self._lab = lab
+        if self._lab:
+            self._run_lab()
         if self._code:
             self._install_code()
             self._install_extensions()
@@ -60,6 +69,24 @@ class ColabCode:
             print(f"Code Server can be accessed on: {url}")
         else:
             print(f"Public URL: {url}")
+
+    def _run_lab(self):
+        os.system(f"fuser -n tcp -k {self.port}")
+        if self._mount and colab_env:
+            drive.mount("/content/drive")
+        if self.password:
+            lab_cmd = f"jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password='{self.password}'"
+        else:
+            lab_cmd = "jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+        with subprocess.Popen(
+            [lab_cmd],
+            shell=True,
+            stdout=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True,
+        ) as proc:
+            for line in proc.stdout:
+                print(line, end="")
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
