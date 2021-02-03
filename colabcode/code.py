@@ -36,7 +36,7 @@ class ColabCode:
         self._lab = lab
         if self._lab:
             self._start_server()
-            self._run_lab()
+            # self._run_lab()
         if self._code:
             self._install_code()
             self._install_extensions()
@@ -70,7 +70,7 @@ class ColabCode:
             print(f"Public URL: {url}")
 
     def _run_lab(self):
-        base_cmd = f"jupyter-lab --ip='localhost' --port {self.port} --no-browser --NotebookApp.token=''"
+        base_cmd = f"jupyter-lab --ip='localhost' --port {self.port} --no-browser --NotebookApp.token='' --NotebookApp.allow_origin='*'"
         os.system(f"fuser -n tcp -k {self.port}")
         if self._mount and colab_env:
             drive.mount("/content/drive")
