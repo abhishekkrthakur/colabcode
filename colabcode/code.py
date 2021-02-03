@@ -44,9 +44,7 @@ class ColabCode:
 
     @staticmethod
     def _install_code():
-        subprocess.run(
-            ["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE
-        )
+        subprocess.run(["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE)
         subprocess.run(
             ["sh", "install.sh", "--version", f"{CODESERVER_VERSION}"],
             stdout=subprocess.PIPE,
@@ -75,9 +73,9 @@ class ColabCode:
         if self._mount and colab_env:
             drive.mount("/content/drive")
         if self.password:
-            lab_cmd = f"jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password='{self.password}'"
+            lab_cmd = f"jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password='{self.password}' --allow-root"
         else:
-            lab_cmd = "jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+            lab_cmd = "jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password='' --allow-root"
         with subprocess.Popen(
             [lab_cmd],
             shell=True,
