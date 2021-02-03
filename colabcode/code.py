@@ -35,6 +35,7 @@ class ColabCode:
         self._code = code
         self._lab = lab
         if self._lab:
+            self._start_server()
             self._run_lab()
         if self._code:
             self._install_code()
@@ -69,13 +70,14 @@ class ColabCode:
             print(f"Public URL: {url}")
 
     def _run_lab(self):
+        base_cmd = "jupyter-lab --ip='localhost' --no-browser --NotebookApp.token=''"
         os.system(f"fuser -n tcp -k {self.port}")
         if self._mount and colab_env:
             drive.mount("/content/drive")
         if self.password:
-            lab_cmd = f"jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password='{self.password}' --allow-root"
+            lab_cmd = base_cmd + f" --NotebookApp.password='{self.password}' --allow-root"
         else:
-            lab_cmd = "jupyter-lab --ip='localhost' --no-browser --NotebookApp.token='' --NotebookApp.password='' --allow-root"
+            lab_cmd = base_cmd + " --NotebookApp.password='' --allow-root"
         with subprocess.Popen(
             [lab_cmd],
             shell=True,
