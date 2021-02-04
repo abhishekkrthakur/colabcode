@@ -30,7 +30,32 @@ if __name__ == "__main__":
         action="store_true",
         help="if you use --mount_drive, your google drive will be mounted",
     )
+    optional.add_argument(
+        "--user_data_dir",
+        type=str,
+        help="Custom folder path for storing user related data",
+        default=None,
+    )
+    optional.add_argument(
+        "--extensions_dir",
+        type=str,
+        help="Custom folder path for storing installed extentions",
+        default=None,
+    )
+    optional.add_argument(
+        "--config",
+        type=str,
+        help="Custom file path for code-server config file",
+        default=None,
+    )
 
     args = parser.parse_args()
 
-    ColabCode(port=args.port, password=args.password, mount_drive=args.mount_drive)
+    ColabCode(
+        port=args.port,
+        password=args.password,
+        mount_drive=args.mount_drive,
+        user_data_dir=args.user_data_dir,
+        extensions_dir=args.extensions_dir,
+        config=args.config,
+    )

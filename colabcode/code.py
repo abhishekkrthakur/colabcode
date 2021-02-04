@@ -6,7 +6,6 @@ import nest_asyncio
 import uvicorn
 from pyngrok import ngrok
 
-
 try:
     from google.colab import drive
 
@@ -26,13 +25,19 @@ class ColabCode:
         password=None,
         authtoken=None,
         mount_drive=False,
+        user_data_dir=None,
+        config=None,
+        extensions_dir=None,
         code=True,
         lab=False,
     ):
         self.port = port
         self.password = password
         self.authtoken = authtoken
+        self._config = config
+        self._extensions_dir = extensions_dir
         self._mount = mount_drive
+        self._user_data_dir = user_data_dir
         self._code = code
         self._lab = lab
         if self._lab:
@@ -54,10 +59,20 @@ class ColabCode:
             stdout=subprocess.PIPE,
         )
 
-    @staticmethod
-    def _install_extensions():
+    def _install_extensions(self):
         for ext in EXTENSIONS:
-            subprocess.run(["code-server", "--install-extension", f"{ext}"])
+            if self._extensions_dir:
+                subprocess.run(
+                    [
+                        "code-server",
+                        "--extensions-dir",
+                        f"{self._extensions_dir}",
+                        "--install-extension",
+                        f"{ext}",
+                    ]
+                )
+            else:
+                subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
         if self.authtoken:
@@ -96,12 +111,23 @@ class ColabCode:
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
+        prefix = []
+        suffix = []
+        suffix.append(f"--port {self.port}")
+        suffix.append(f"--disable-telemetry")
+        code_cmd = "code-server "
         if self._mount and colab_env:
             drive.mount("/content/drive")
         if self.password:
-            code_cmd = f"PASSWORD={self.password} code-server --port {self.port} --disable-telemetry"
-        else:
-            code_cmd = f"code-server --port {self.port} --auth none --disable-telemetry"
+            prefix.append(f"PASSWORD={self.password} ")
+            suffix.append("--auth none")
+        if self._config:
+            suffix.append(f"--config {self._config}")
+        if self._extensions_dir:
+            suffix.append(f"--extensions-dir {self._extensions_dir}")
+        if self._user_data_dir:
+            suffix.append(f"--user-data-dir {self._user_data_dir}")
+        code_cmd = " ".join(prefix) + code_cmd + " ".join(suffix)
         with subprocess.Popen(
             [code_cmd],
             shell=True,
