@@ -59,10 +59,20 @@ class ColabCode:
             stdout=subprocess.PIPE,
         )
 
-    @staticmethod
-    def _install_extensions():
+    def _install_extensions(self):
         for ext in EXTENSIONS:
-            subprocess.run(["code-server", "--install-extension", f"{ext}"])
+            if self._extensions_dir:
+                subprocess.run(
+                    [
+                        "code-server",
+                        "--extensions-dir",
+                        f"{self._extensions_dir}",
+                        "--install-extension",
+                        f"{ext}",
+                    ]
+                )
+            else:
+                subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
         if self.authtoken:
