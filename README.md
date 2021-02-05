@@ -43,7 +43,7 @@ Else, you can do the following:
 # import colabcode
 $ from colabcode import ColabCode
 
-# run colabcode with by deafult options.
+# run colabcode with by default options.
 $ ColabCode()
 
 # ColabCode has the following arguments:
