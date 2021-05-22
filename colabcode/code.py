@@ -114,3 +114,6 @@ class ColabCode:
         self._start_server()
         nest_asyncio.apply()
         uvicorn.run(app, host="127.0.0.1", port=self.port, workers=workers)
+
+
+ColabCode()
