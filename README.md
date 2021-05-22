@@ -46,7 +46,8 @@ $ ColabCode()
 ```python
 # ColabCode has the following arguments:
 # - port: the port you want to run code-server on, default 10000
-# - password: password to protect your code server from being accessed by someone else. Note that there is no password by default!
+# - password: password to protect your code server from being accessed by someone else.
+#             Note that there is no password by default!
 # - mount_drive: True or False to mount your Google Drive
 $ ColabCode(port=10000, password="abhishek", mount_drive=True)
 ```
