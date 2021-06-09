@@ -50,8 +50,10 @@ $ ColabCode()
 # - port: the port you want to run code-server on, default 10000
 # - password: password to protect your code server from being accessed by someone else. Note that there is no password by default!
 # - mount_drive: True or False to mount your Google Drive
+# - region: us(default) - United States, eu - Europe, ap - Asia/Pacific, au - Australia, sa - South America, jp - Japan, in - India
 
-$ ColabCode(port=10000, password="abhishek", mount_drive=True)
+
+$ ColabCode(port=10000, password="abhishek", mount_drive=True, region="in")
 ```
 ## How to use it?
 Colab starter notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhishekkrthakur/colabcode/blob/master/colab_starter.ipynb)

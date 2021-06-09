@@ -4,7 +4,7 @@ import uuid
 
 import nest_asyncio
 import uvicorn
-from pyngrok import ngrok
+from pyngrok import ngrok, conf
 
 
 try:
@@ -26,6 +26,7 @@ class ColabCode:
         password=None,
         authtoken=None,
         mount_drive=False,
+        region="us",
         code=True,
         lab=False,
     ):
@@ -33,6 +34,7 @@ class ColabCode:
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
+        self.region = region
         self._code = code
         self._lab = lab
         if self._lab:
@@ -60,6 +62,7 @@ class ColabCode:
             subprocess.run(["code-server", "--install-extension", f"{ext}"])
 
     def _start_server(self):
+        conf.get_default().region = self.region
         if self.authtoken:
             ngrok.set_auth_token(self.authtoken)
         active_tunnels = ngrok.get_tunnels()
