@@ -28,7 +28,7 @@ if __name__ == "__main__":
     optional.add_argument(
         "--mount_drive",
         action="store_true",
-        help="if you use --mount_drive, your google drive will be mounted",
+        help="if you use --mount_drive, your google drive will be mounted(Only in colab)",
     )
 
     args = parser.parse_args()

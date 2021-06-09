@@ -32,7 +32,7 @@ required arguments:
 
 optional arguments:
   --password PASSWORD  password to protect your code-server from unauthorized access
-  --mount_drive        if you use --mount_drive, your google drive will be mounted
+  --mount_drive        if you use --mount_drive, your google drive will be mounted (Only in colab)
 ```
 
 Else, you can do the following:
@@ -49,12 +49,14 @@ $ ColabCode()
 # ColabCode has the following arguments:
 # - port: the port you want to run code-server on, default 10000
 # - password: password to protect your code server from being accessed by someone else. Note that there is no password by default!
-# - mount_drive: True or False to mount your Google Drive
+# - mount_drive: True or False to mount your Google Drive (Only in colab)
 
 $ ColabCode(port=10000, password="abhishek", mount_drive=True)
 ```
 ## How to use it?
 Colab starter notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhishekkrthakur/colabcode/blob/master/colab_starter.ipynb)
+
+Kaggle starter notebook: [![Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/kernels/fork-version/43820352)
 
 `ColabCode` comes pre-installed with some VS Code extensions.
 
