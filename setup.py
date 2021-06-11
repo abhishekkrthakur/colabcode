@@ -9,7 +9,7 @@ if __name__ == "__main__":
     setup(
         name="colabcode",
         scripts=["scripts/colabcode"],
-        version="0.2.0",
+        version="0.3.0",
         description="ColabCode - Run codeserver on Colab!",
         long_description=long_description,
         long_description_content_type="text/markdown",
