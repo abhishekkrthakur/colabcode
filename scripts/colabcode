@@ -30,7 +30,12 @@ if __name__ == "__main__":
         action="store_true",
         help="if you use --mount_drive, your google drive will be mounted",
     )
-
+    optional.add_argument(
+        "--option",
+        type=str,
+        help="choose between localtunnel and ngrok for tunneling services",
+        default="ngrok"
+    )
     args = parser.parse_args()
 
-    ColabCode(port=args.port, password=args.password, mount_drive=args.mount_drive)
+    ColabCode(port=args.port, password=args.password, mount_drive=args.mount_drive,option=args.option)
