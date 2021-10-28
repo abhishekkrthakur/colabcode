@@ -14,8 +14,8 @@ try:
 except ImportError:
     colab_env = False
 
-
-EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter", "mechatroner.rainbow-csv", "vscode-icons-team.vscode-icons"]
+EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter", "mechatroner.rainbow-csv", "vscode-icons-team.vscode-icons",
+              "zhuangtongfa.Material-theme", "coenraads.bracket-pair-colorizer", "visualstudioexptteam.vscodeintellicode"]
 CODESERVER_VERSION = "3.10.2"
 
 
@@ -26,12 +26,14 @@ class ColabCode:
         password=None,
         authtoken=None,
         mount_drive=False,
+        default_folder=None,
         code=True,
         lab=False,
     ):
         self.port = port
         self.password = password
         self.authtoken = authtoken
+        self.default_folder = default_folder
         self._mount = mount_drive
         self._code = code
         self._lab = lab
@@ -66,7 +68,11 @@ class ColabCode:
             ngrok.disconnect(public_url)
         url = ngrok.connect(addr=self.port, bind_tls=True)
         if self._code:
-            print(f"Code Server can be accessed on: {url}")
+            if self.default_folder:
+                print(
+                    f"Code Server can be accessed on: {url.public_url}?folder={self.default_folder}")
+            else:
+                print(f"Code Server can be accessed on: {url}")
         else:
             print(f"Public URL: {url}")
 
