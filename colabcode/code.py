@@ -15,7 +15,9 @@ except ImportError:
     colab_env = False
 
 
-EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter", "mechatroner.rainbow-csv", "vscode-icons-team.vscode-icons"]
+EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter", "mechatroner.rainbow-csv", "vscode-icons-team.vscode-icons",
+"julialang.language-julia", "golang.go",
+]
 CODESERVER_VERSION = "4.0.1"
 
 
@@ -40,9 +42,9 @@ class ColabCode:
             self._run_lab()
         if self._code:
             self._install_code()
-            self._install_extensions()
             self._install_go()
             self._install_julia()
+            self._install_extensions()
             self._start_server()
             self._run_code()
 
