@@ -56,13 +56,13 @@ class ColabCode:
     
     @staticmethod
     def _install_go():
-        subprocess.run(["cd","/opt","&&","wget","https://go.dev/dl/go1.17.6.linux-amd64.tar.gz"],stdout=subprocess.PIPE)
-        subprocess.run(["cd","/opt","&&", "tar","xvfz","go1.17.6.linux-amd64.tar.gz"],stdout=subprocess.PIPE)
+        subprocess.run(["wget","https://go.dev/dl/go1.17.6.linux-amd64.tar.gz"],stdout=subprocess.PIPE)
+        subprocess.run([ "tar","xvfz","go1.17.6.linux-amd64.tar.gz","--directory","/opt"],stdout=subprocess.PIPE)
     
     @staticmethod
     def _install_julia():
-        subprocess.run(["cd","/opt","&&","wget","https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.1-linux-x86_64.tar.gz"],stdout=subprocess.PIPE)
-        subprocess.run(["cd","/opt","&&", "tar","xvfz","julia-1.7.1-linux-x86_64.tar.gz"],stdout=subprocess.PIPE)
+        subprocess.run(["wget","https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.1-linux-x86_64.tar.gz"],stdout=subprocess.PIPE)
+        subprocess.run([ "tar","xvfz","julia-1.7.1-linux-x86_64.tar.gz","--directory","/opt"],stdout=subprocess.PIPE)
 
     @staticmethod
     def _install_extensions():
