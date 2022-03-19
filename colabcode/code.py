@@ -58,8 +58,8 @@ class ColabCode:
     
     @staticmethod
     def _install_go():
-        subprocess.run(["wget","https://go.dev/dl/go1.17.6.linux-amd64.tar.gz"],stdout=subprocess.PIPE)
-        subprocess.run([ "tar","xvfz","go1.17.6.linux-amd64.tar.gz","--directory","/opt"],stdout=subprocess.PIPE)
+        subprocess.run(["wget","https://go.dev/dl/go1.18.linux-amd64.tar.gz"],stdout=subprocess.PIPE)
+        subprocess.run([ "tar","xvfz","go1.18.linux-amd64.tar.gz","--directory","/opt"],stdout=subprocess.PIPE)
         subprocess.run(["ln","-s","/opt/go/bin/go","/usr/bin/go"])
     
     @staticmethod
