@@ -143,7 +143,7 @@ class ColabCode:
         os.system(f"fuser -n tcp -k {self.port}")
         if self._mount and colab_env:
             drive.mount("/content/drive")
-        pluto_run_cmd_list = ["julia","-e",f'import Pluto;Pluto.run(port={self.port},launch_browser=false)']
+        pluto_run_cmd_list = ["julia","-e",f'using Pkg;Pkg.add("Pluto");import Pluto;Pluto.run(port={self.port},launch_browser=false)']
         print(pluto_run_cmd_list)
         with subprocess.Popen(
             pluto_run_cmd_list,
@@ -152,8 +152,10 @@ class ColabCode:
             bufsize=1,
             universal_newlines=True,
         ) as proc:
-            for line in proc.stdout:
-                print(line, end="")
+            stdout,stderr = proc.communicate()
+            print(stderr)
+            #for line in proc.stdout:
+                #print(line, end="")
 
 
 
