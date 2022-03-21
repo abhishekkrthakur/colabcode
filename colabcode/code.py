@@ -159,7 +159,8 @@ class ColabCode:
             for line in proc.stdout:
                 if "localhost" in line:
                     print("localhost in line")
-                    print(line.replace(f"http://localhost:{self.port}",self.url),end='')
+                    print(line,end="")
+                    print(line.replace(f"http://localhost:{self.port}",self.url),end="")
                     
                 print(line, end="")
 
