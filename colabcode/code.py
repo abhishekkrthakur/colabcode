@@ -131,12 +131,11 @@ class ColabCode:
     
 
     def _run_pluto(self):
-        token = str(uuid.uuid1())
-        print(f"Pluto token: {token}")
+        
         os.system(f"fuser -n tcp -k {self.port}")
         if self._mount and colab_env:
             drive.mount("/content/drive")
-        pluto_run_cmd_list = ["julia","-e",f'import Pluto;Pluto.run(port={self.port},secret="{token}")']
+        pluto_run_cmd_list = ["julia","-e",f'import Pluto;Pluto.run(port={self.port},launch_browser=false)']
         print(pluto_run_cmd_list)
         with subprocess.Popen(
             pluto_run_cmd_list,
