@@ -155,13 +155,12 @@ class ColabCode:
             bufsize=1,
             universal_newlines=True,
         ) as proc:
-            #stdout,stderr = proc.communicate()
-            #print("stderr",stderr)
-            #print("stdout",stdout)
+            
             for line in proc.stdout:
                 if "localhost" in line:
+                    print("localhost in line")
                     print(line.replace(f"http://localhost:{self.port}",self.url),end='')
-                    continue
+                    
                 print(line, end="")
 
 
