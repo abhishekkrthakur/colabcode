@@ -51,9 +51,13 @@ class ColabCode:
             self._run_code()
         
         if self._pluto:
+            print("installing julia")
             self._install_julia()
+            print("installing pluto")
             self._install_pluto()
+            print("starting server")
             self._start_server()
+            print("running pluto")
             self._run_pluto()
 
 
@@ -116,6 +120,7 @@ class ColabCode:
         ) as proc:
             for line in proc.stdout:
                 print(line, end="")
+
     @staticmethod   
     def _install_pluto():
         pluto_install_cmd_list = ["julia","-e",'using Pkg;Pkg.add("Pluto")']
