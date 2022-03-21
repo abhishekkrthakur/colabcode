@@ -119,14 +119,16 @@ class ColabCode:
     @staticmethod   
     def _install_pluto():
         pluto_install_cmd_list = ["julia","-e",'using Pkg;Pkg.add("Pluto")']
+        print("installing Pluto")
         with subprocess.Popen(
             pluto_install_cmd_list,
             shell=True,
             stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             bufsize=1,
             universal_newlines=True,
         ) as proc:
-            for line in proc.stdout:
+            for line in proc.stderr:
                 print(line, end="")
     
 
