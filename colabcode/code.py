@@ -137,6 +137,7 @@ class ColabCode:
         if self._mount and colab_env:
             drive.mount("/content/drive")
         pluto_run_cmd_list = ["julia","-e",f'import Pluto;Pluto.run(port={self.port},secret={token})']
+        print(pluto_run_cmd_list)
         with subprocess.Popen(
             pluto_run_cmd_list,
             shell=True,
