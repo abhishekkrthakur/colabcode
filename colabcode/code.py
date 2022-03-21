@@ -30,6 +30,7 @@ class ColabCode:
         mount_drive=False,
         code=True,
         lab=False,
+        pluto=False
     ):
         self.port = port
         self.password = password
@@ -37,6 +38,7 @@ class ColabCode:
         self._mount = mount_drive
         self._code = code
         self._lab = lab
+        self._pluto = pluto
         if self._lab:
             self._start_server()
             self._run_lab()
@@ -47,6 +49,12 @@ class ColabCode:
             self._install_extensions()
             self._start_server()
             self._run_code()
+        
+        if self._pluto:
+            self._install_julia()
+            self._install_pluto()
+            self._run_pluto()
+
 
     @staticmethod
     def _install_code():
@@ -107,6 +115,41 @@ class ColabCode:
         ) as proc:
             for line in proc.stdout:
                 print(line, end="")
+    @staticmethod   
+    def _install_pluto():
+        pluto_install_cmd_list = ["julia","-e",'using Pkg;Pkg.add("Pluto")']
+        with subprocess.Popen(
+            pluto_install_cmd_list,
+            shell=True,
+            stdout=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True,
+        ) as proc:
+            for line in proc.stdout:
+                print(line, end="")
+    
+
+    def _run_pluto(self):
+        token = str(uuid.uuid1())
+        print(f"Pluto token: {token}")
+        os.system(f"fuser -n tcp -k {self.port}")
+        if self._mount and colab_env:
+            drive.mount("/content/drive")
+        pluto_run_cmd_list = ["julia","-e",f'import Pluto;Pluto.run(port={self.port},secret={token})']
+        with subprocess.Popen(
+            pluto_run_cmd_list,
+            shell=True,
+            stdout=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True,
+        ) as proc:
+            for line in proc.stdout:
+                print(line, end="")
+
+
+
+
+
 
     def _run_code(self):
         os.system(f"fuser -n tcp -k {self.port}")
