@@ -156,7 +156,7 @@ class ColabCode:
             #stdout,stderr = proc.communicate()
             #print("stderr",stderr)
             #print("stdout",stdout)
-            for line in proc.stderr:
+            for line in proc.stdout:
                 print(line, end="")
 
 
