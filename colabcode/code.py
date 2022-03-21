@@ -53,6 +53,7 @@ class ColabCode:
         if self._pluto:
             self._install_julia()
             self._install_pluto()
+            self._start_server()
             self._run_pluto()
 
 
