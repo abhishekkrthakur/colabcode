@@ -128,15 +128,15 @@ class ColabCode:
         print(pluto_install_cmd_list)
         with subprocess.Popen(
             pluto_install_cmd_list,
-            shell=True,
+            shell=False,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             bufsize=1,
             universal_newlines=True,
         ) as proc:
-            for line in proc.stderr:
-                print(line, end="")
-    
+            stdout,stderr = proc.communicate()
+
+            print("error is="+stderr)
 
     def _run_pluto(self):
         
