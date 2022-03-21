@@ -147,7 +147,7 @@ class ColabCode:
         print(pluto_run_cmd_list)
         with subprocess.Popen(
             pluto_run_cmd_list,
-            shell=True,
+            shell=False,
             stdout=subprocess.PIPE,
             stderr = subprocess.PIPE,
             bufsize=1,
