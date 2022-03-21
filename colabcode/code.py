@@ -39,6 +39,7 @@ class ColabCode:
         self._code = code
         self._lab = lab
         self._pluto = pluto
+        self.url = None
         if self._lab:
             self._start_server()
             self._run_lab()
@@ -94,6 +95,7 @@ class ColabCode:
             public_url = tunnel.public_url
             ngrok.disconnect(public_url)
         url = ngrok.connect(addr=self.port, bind_tls=True)
+        self.url = url
         if self._code:
             print(f"Code Server can be accessed on: {url}")
         else:
@@ -157,6 +159,9 @@ class ColabCode:
             #print("stderr",stderr)
             #print("stdout",stdout)
             for line in proc.stdout:
+                if "localhost" in line:
+                    print(line.replace(f"http://localhost:{self.port}",self.url),end='')
+                    continue
                 print(line, end="")
 
 
