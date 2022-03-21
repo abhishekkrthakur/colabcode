@@ -149,11 +149,13 @@ class ColabCode:
             pluto_run_cmd_list,
             shell=True,
             stdout=subprocess.PIPE,
+            stderr = subprocess.PIPE,
             bufsize=1,
             universal_newlines=True,
         ) as proc:
             stdout,stderr = proc.communicate()
-            print(stderr)
+            print("stderr",stderr)
+            print("stdout",stdout)
             #for line in proc.stdout:
                 #print(line, end="")
 
