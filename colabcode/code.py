@@ -18,7 +18,7 @@ except ImportError:
 EXTENSIONS = ["ms-python.python", "ms-toolsai.jupyter", "mechatroner.rainbow-csv", "vscode-icons-team.vscode-icons",
 "julialang.language-julia", "golang.go",
 ]
-CODESERVER_VERSION = "4.0.1"
+CODESERVER_VERSION = "4.13.0"
 
 
 class ColabCode:
@@ -72,8 +72,8 @@ class ColabCode:
     
     @staticmethod
     def _install_go():
-        subprocess.run(["wget","https://go.dev/dl/go1.18.linux-amd64.tar.gz"],stdout=subprocess.PIPE)
-        subprocess.run([ "tar","xvfz","go1.18.linux-amd64.tar.gz","--directory","/opt"],stdout=subprocess.PIPE)
+        subprocess.run(["wget","https://go.dev/dl/go1.20.4.linux-amd64.tar.gz"],stdout=subprocess.PIPE)
+        subprocess.run([ "tar","xvfz","go1.20.4.linux-amd64.tar.gz","--directory","/opt"],stdout=subprocess.PIPE)
         subprocess.run(["ln","-s","/opt/go/bin/go","/usr/bin/go"])
     
     @staticmethod
