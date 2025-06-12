@@ -23,6 +23,7 @@ class ColabCode:
     def __init__(
         self,
         port=10000,
+        proto="http",
         password=None,
         authtoken=None,
         mount_drive=False,
@@ -30,6 +31,7 @@ class ColabCode:
         lab=False,
     ):
         self.port = port
+        self.proto = proto
         self.password = password
         self.authtoken = authtoken
         self._mount = mount_drive
@@ -46,11 +48,13 @@ class ColabCode:
 
     @staticmethod
     def _install_code():
-        subprocess.run(["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE)
-        subprocess.run(
-            ["sh", "install.sh", "--version", f"{CODESERVER_VERSION}"],
-            stdout=subprocess.PIPE,
-        )
+        result = subprocess.run(["wget", "https://code-server.dev/install.sh"], stdout=subprocess.PIPE)
+        if result.returncode != 0:
+            raise RuntimeError("Failed to download installation script")
+            
+        result = subprocess.run(["sh", "install.sh"], stdout=subprocess.PIPE)
+        if result.returncode != 0:
+            raise RuntimeError("Failed to run installation script")
 
     @staticmethod
     def _install_extensions():
@@ -64,7 +68,7 @@ class ColabCode:
         for tunnel in active_tunnels:
             public_url = tunnel.public_url
             ngrok.disconnect(public_url)
-        url = ngrok.connect(addr=self.port, bind_tls=True)
+        url = ngrok.connect(addr=self.port, proto=self.proto, bind_tls=True)
         if self._code:
             print(f"Code Server can be accessed on: {url}")
         else:
